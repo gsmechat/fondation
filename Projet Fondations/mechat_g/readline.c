@@ -5,8 +5,11 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Thu Mar 24 11:40:33 2016 MECHAT Guillaume
-** Last update Thu Mar 24 11:40:34 2016 MECHAT Guillaume
+** Last update Thu Mar 24 12:44:12 2016 MECHAT Guillaume
 */
+
+#include <stdlib.h>
+#include <unistd.h>
 
 char		*readLine()
 {

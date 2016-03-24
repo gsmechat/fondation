@@ -5,14 +5,14 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Thu Mar 24 10:21:29 2016 MECHAT Guillaume
+** Last update Thu Mar 24 12:49:54 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
 # define HEADER_H_
 
 #define SYNTAX_ERROR "Syntax Error: ./fondation --ip 192.168.1.1 --port 4242"
-
+#define BUFFER_SIZE 1024
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -28,6 +28,10 @@ typedef struct in_addr t_in_addr;
 int		my_strcmp(char *s1, char *s2);
 void		my_putchar(char c);
 void		my_putstr(char *str);
-
+char		*readLine();
+int		my_strlen(char *str);
+int		my_send(int sock, char * str);
+int		my_recv(int sock);
+int		handle_data(char *buff);
 
 #endif
