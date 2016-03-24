@@ -5,14 +5,18 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Thu Mar 24 12:49:54 2016 MECHAT Guillaume
+** Last update Thu Mar 24 15:54:19 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
 # define HEADER_H_
 
-#define SYNTAX_ERROR "Syntax Error: ./fondation --ip 192.168.1.1 --port 4242"
+#define SYN_ERR "\033[31mError: ./fondation--ip 192.168.1.1 --port 4242\033[0m"
+#define MAX_LENGTH_CHAR "\033[31mERROR: 250 lignes MAXIMUM\033[0m\n"
+#define MSG_BYE "\033[34mAu revoir et a bientot ;)\033[0m\n"
+#define PROMPT_CMD "\033[34mThe-Big-Quest\033[0m@localhost \033[32m~ \033[0m"
 #define BUFFER_SIZE 1024
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -21,7 +25,7 @@
 #include <netinet/in.h>
 
 
-typedef struct sockaddr_in t_sockaddr_in_client;
+typedef struct sockaddr_in t_sockaddr_serveur;
 typedef struct sockaddr t_sockaddr;
 typedef struct in_addr t_in_addr;
 

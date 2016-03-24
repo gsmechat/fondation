@@ -5,65 +5,56 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Mon Mar 21 11:18:11 2016 MECHAT Guillaume
-** Last update Thu Mar 24 12:53:13 2016 MECHAT Guillaume
+** Last update Thu Mar 24 15:58:03 2016 MECHAT Guillaume
 */
 
 #include "header.h"
 
-int init_connection(char *ip, int port)
+int			init_connection(char *ip, int port)
 {
-  int sock;
+  t_sockaddr_serveur	serveur;
+  int			my_socket;
+  int			co;
 
-  sock = socket(AF_INET, SOCK_STREAM, 0);
-  if (sock == -1)
+  my_socket = socket(AF_INET, SOCK_STREAM, 0);
+  if (my_socket == -1)
     {
-      my_putstr("KO");
       perror(__FUNCTION__);
-      return (EXIT_FAILURE);
+      return (-1);
     }
-
-  t_sockaddr_in_client d;
-  d.sin_addr.s_addr = inet_addr(ip);
-  d.sin_port        = htons(port);
-  d.sin_family      = AF_INET;
-
-  int connection;
-
-  connection = connect(sock, (t_sockaddr *) &d, sizeof(t_sockaddr));
-  if (connection == -1)
+  serveur.sin_addr.s_addr = inet_addr(ip);
+  serveur.sin_port        = htons(port);
+  serveur.sin_family      = AF_INET;
+  co = connect(my_socket, (t_sockaddr *) &serveur, sizeof(t_sockaddr));
+  if (co == -1)
     {
       perror(__FUNCTION__);
       return(EXIT_FAILURE);
     }
-  return (sock);
+  return (my_socket);
 }
 
-int handle_command(int sock)
+int handle_command(int my_socket)
 {
-  char *cmd;
-
+  char *input;
+  
   while (42)
     {
-      my_putstr("Enter command:\n");
-      my_putstr("> ");
-
-      cmd = readLine();
-
-      if (my_strlen(cmd) > 250)
-	my_putstr("Command too long (250 characters max allowed)\n");
-      else if (my_strlen(cmd) > 0)
+      my_putstr(PROMPT_CMD);
+      input = readLine();
+      if (my_strcmp(input, "/bye") == 0)
 	{
-	  if (my_strcmp("/bye", cmd) == 0)
-	    {
-	      my_putstr("Bye bye !\n");
-	      close(sock);
-	      return (EXIT_SUCCESS);
-	    }
-
-	  my_send(sock, cmd);
-	  my_recv(sock);
+	  my_putstr(MSG_BYE);
+	  close(my_socket);
+	  return (EXIT_SUCCESS);
 	}
-      my_bzero(cmd);
+      else if (my_strlen(input) > 250)
+	my_putstr(MAX_LENGTH_CHAR);
+      else if (my_strlen(input) > 0)
+	{
+	  my_send(my_socket, input);
+	  my_recv(my_socket);
+	}
     }
 }
 
@@ -80,7 +71,7 @@ int my_recv(int sock)
   char *buffer;
   int len;
   int done;
-
+  
   buffer = malloc(BUFFER_SIZE);
 
   while ((len = read(sock, buffer, BUFFER_SIZE)) > 0)
@@ -95,22 +86,9 @@ int my_recv(int sock)
   return (EXIT_SUCCESS);
 }
 
-int handle_data(char *buffer)
+int handle_data(char *buff)
 {
-  int i;
-  for (i = 0; i < my_strlen(buffer); i++) {
-    if (buffer[i] == '\n')
-      {
-	my_putchar('\n');
-	return (1);
-      }
-    if (buffer[i] == '#')
-      {
-	my_putchar('\n');
-      }
-    my_putchar(buffer[i]);
-  }
-
+  my_putstr(buff);
   return (EXIT_SUCCESS);
 }
 
@@ -133,6 +111,6 @@ int	main(int argc, char **argv)
 	}
     }
   else
-    my_putstr(SYNTAX_ERROR);
+    my_putstr(SYN_ERR);
   return (0);
 }
