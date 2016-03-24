@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Thu Mar 24 09:53:41 2016 MECHAT Guillaume
+** Last update Thu Mar 24 09:54:54 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
@@ -16,6 +16,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 
 int		my_strcmp(char *s1, char *s2);
 void		my_putchar(char c);
