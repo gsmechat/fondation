@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Thu Mar 24 09:54:54 2016 MECHAT Guillaume
+** Last update Thu Mar 24 10:21:29 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
@@ -19,6 +19,11 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+
+
+typedef struct sockaddr_in t_sockaddr_in_client;
+typedef struct sockaddr t_sockaddr;
+typedef struct in_addr t_in_addr;
 
 int		my_strcmp(char *s1, char *s2);
 void		my_putchar(char c);
