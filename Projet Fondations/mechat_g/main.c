@@ -5,12 +5,10 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Mon Mar 21 11:18:11 2016 MECHAT Guillaume
-** Last update Mon Mar 21 12:03:19 2016 MECHAT Guillaume
+** Last update Thu Mar 24 09:54:01 2016 MECHAT Guillaume
 */
 
 #include "header.h"
-#include <stdio.h>
-#include <unistd.h>
 
 int	main(int argc, char **argv)
 {
