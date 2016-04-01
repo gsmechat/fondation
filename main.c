@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Mon Mar 21 11:18:11 2016 MECHAT Guillaume
-** Last update Thu Mar 24 15:58:03 2016 MECHAT Guillaume
+** Last update Sat Apr  2 01:06:06 2016 MECHAT Guillaume
 */
 
 #include "header.h"
@@ -42,28 +42,33 @@ int handle_command(int my_socket)
     {
       my_putstr(PROMPT_CMD);
       input = readLine();
+      my_put_nbr(my_strlen(input));
       if (my_strcmp(input, "/bye") == 0)
 	{
 	  my_putstr(MSG_BYE);
+	  free(input);
 	  close(my_socket);
 	  return (EXIT_SUCCESS);
 	}
-      else if (my_strlen(input) > 250)
-	my_putstr(MAX_LENGTH_CHAR);
-      else if (my_strlen(input) > 0)
+      if (my_strlen(input) >= MAX_BUFFER)
 	{
-	  my_send(my_socket, input);
+	  my_putstr(MAX_LENGTH_CHAR);
+	}
+      //else if (my_strlen(input) > 0)
+      else
+	{
+	  my_putchar('\n');
+	  //my_send(my_socket, input);
+	  write(my_socket, input, my_strlen(input));
 	  my_recv(my_socket);
 	}
+      free(input);
     }
 }
 
-int my_send(int sock, char * str)
+void my_send(int sock, char * str)
 {
-  int result;
-  result = write(sock, str, my_strlen(str));
-
-  return (result);
+  write(sock, str, my_strlen(str));
 }
 
 int my_recv(int sock)
@@ -77,6 +82,7 @@ int my_recv(int sock)
   while ((len = read(sock, buffer, BUFFER_SIZE)) > 0)
     {
       done = handle_data(buffer);
+      free(buffer);
       if (done == 1)
 	return (EXIT_SUCCESS);
     }
@@ -88,7 +94,17 @@ int my_recv(int sock)
 
 int handle_data(char *buff)
 {
-  my_putstr(buff);
+  int i;
+
+  for (i = 0; i < my_strlen(buff); i++) {
+    if (buff[i] == '\n')
+      {
+	my_putchar('\n');
+	return (1);
+      }
+    my_putchar(buff[i]);
+  }
+
   return (EXIT_SUCCESS);
 }
 
