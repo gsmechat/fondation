@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Thu Mar 24 15:54:19 2016 MECHAT Guillaume
+** Last update Sat Apr  2 01:02:47 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
@@ -16,6 +16,7 @@
 #define MSG_BYE "\033[34mAu revoir et a bientot ;)\033[0m\n"
 #define PROMPT_CMD "\033[34mThe-Big-Quest\033[0m@localhost \033[32m~ \033[0m"
 #define BUFFER_SIZE 1024
+#define MAX_BUFFER 250
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,8 +35,8 @@ void		my_putchar(char c);
 void		my_putstr(char *str);
 char		*readLine();
 int		my_strlen(char *str);
-int		my_send(int sock, char * str);
+void		my_send(int sock, char * str);
 int		my_recv(int sock);
 int		handle_data(char *buff);
-
+void		my_put_nbr(int n);
 #endif
