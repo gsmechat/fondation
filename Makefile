@@ -5,7 +5,7 @@
 ## Login   <mechat_g@etna-alternance.net>
 ## 
 ## Started on  Sat Oct 24 23:10:00 2015 MECHAT Guillaume
-## Last update Sat Apr  2 00:23:00 2016 MECHAT Guillaume
+## Last update Sat Apr  2 22:49:10 2016 MECHAT Guillaume
 ##
 
 CC	=	gcc
@@ -16,7 +16,7 @@ SRC	=	main.c		\
 		my_strcmp.c	\
 		readline.c	\
 		my_strlen.c	\
-		my_put_nbr.c	\
+		my_getnbr.c	\
 
 CFLAG	=	-W -Wall -Werror
 OBJS	=	$(SRC:%.c=%.o)
@@ -28,7 +28,7 @@ $(NAME):	$(OBJS)
 all:		$(NAME)
 
 clean:
-		$(RM) *.o
+		$(RM) *.o log.txt
 
 fclean:		clean
 		$(RM) $(NAME)

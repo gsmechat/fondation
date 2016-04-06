@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Sat Apr  2 01:02:47 2016 MECHAT Guillaume
+** Last update Sat Apr  2 22:38:46 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
@@ -24,7 +24,10 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
 
 typedef struct sockaddr_in t_sockaddr_serveur;
 typedef struct sockaddr t_sockaddr;
@@ -38,5 +41,9 @@ int		my_strlen(char *str);
 void		my_send(int sock, char * str);
 int		my_recv(int sock);
 int		handle_data(char *buff);
-void		my_put_nbr(int n);
+int		write_log(char *txt, int id);
+void		error();
+int		error_log(char *txt);
+int		my_getnbr(char *str);
+
 #endif

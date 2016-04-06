@@ -5,10 +5,38 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Mon Mar 21 11:18:11 2016 MECHAT Guillaume
-** Last update Sat Apr  2 01:06:06 2016 MECHAT Guillaume
+** Last update Wed Apr  6 10:22:35 2016 MECHAT Guillaume
 */
 
 #include "header.h"
+
+/*void	error()
+{
+  char	*action;
+
+  action = "Connection";
+  perror(__FUNCTION__);
+  error_log(action);
+}
+
+int	error_log(char *txt)
+{
+  int	id;
+
+  id = open("log.txt", O_APPEND|O_CREAT|O_RDWR, 777);
+  write_log(txt, id);
+  write_log(": ", id);
+  write_log(strerror(errno), id);
+  write_log("\n", id);
+  close(id);
+  return (0);
+}
+
+int	write_log(char *txt, int id)
+{
+  write(id, txt, my_strlen(txt));
+  return (0);
+}*/
 
 int			init_connection(char *ip, int port)
 {
@@ -20,7 +48,8 @@ int			init_connection(char *ip, int port)
   if (my_socket == -1)
     {
       perror(__FUNCTION__);
-      return (-1);
+      //error();
+      return (EXIT_FAILURE);
     }
   serveur.sin_addr.s_addr = inet_addr(ip);
   serveur.sin_port        = htons(port);
@@ -29,8 +58,10 @@ int			init_connection(char *ip, int port)
   if (co == -1)
     {
       perror(__FUNCTION__);
+      //      error();
       return(EXIT_FAILURE);
     }
+  //  error();
   return (my_socket);
 }
 
@@ -42,7 +73,6 @@ int handle_command(int my_socket)
     {
       my_putstr(PROMPT_CMD);
       input = readLine();
-      my_put_nbr(my_strlen(input));
       if (my_strcmp(input, "/bye") == 0)
 	{
 	  my_putstr(MSG_BYE);
@@ -54,16 +84,15 @@ int handle_command(int my_socket)
 	{
 	  my_putstr(MAX_LENGTH_CHAR);
 	}
-      //else if (my_strlen(input) > 0)
       else
 	{
 	  my_putchar('\n');
-	  //my_send(my_socket, input);
 	  write(my_socket, input, my_strlen(input));
 	  my_recv(my_socket);
 	}
       free(input);
     }
+  return (EXIT_SUCCESS);
 }
 
 void my_send(int sock, char * str)
@@ -78,7 +107,6 @@ int my_recv(int sock)
   int done;
   
   buffer = malloc(BUFFER_SIZE);
-
   while ((len = read(sock, buffer, BUFFER_SIZE)) > 0)
     {
       done = handle_data(buffer);
@@ -86,9 +114,7 @@ int my_recv(int sock)
       if (done == 1)
 	return (EXIT_SUCCESS);
     }
-
   free(buffer);
-
   return (EXIT_SUCCESS);
 }
 
@@ -104,22 +130,22 @@ int handle_data(char *buff)
       }
     my_putchar(buff[i]);
   }
-
   return (EXIT_SUCCESS);
 }
 
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
+  int		i;
+  int			sock;
+  
   if ((argv[1] != 0 && my_strcmp(argv[1], "--ip") == 0)
       && (argv[3] != 0 && my_strcmp(argv[3], "--port") == 0) && argc > 4)
     {
-      int i;
-      int sock;
-      i = atoi(argv[4]);
+      i = my_getnbr(argv[4]);
       sock = init_connection(argv[2], i);
-      if (sock == 0)
-	return (0);
+      if (sock == 1)
+	return (EXIT_SUCCESS);
       else
 	{
 	  handle_command(sock);
@@ -128,5 +154,5 @@ int	main(int argc, char **argv)
     }
   else
     my_putstr(SYN_ERR);
-  return (0);
+  return (EXIT_SUCCESS);
 }
