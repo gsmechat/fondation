@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Wed Apr  6 18:49:29 2016 MECHAT Guillaume
-** Last update Wed Apr  6 19:06:57 2016 MECHAT Guillaume
+** Last update Wed Apr  6 19:57:43 2016 MECHAT Guillaume
 */
 
 #include "header.h"
@@ -29,9 +29,8 @@ int		command(int my_socket)
           close(my_socket);
           return (EXIT_SUCCESS);
         }
-      else
-        {
-          //my_putchar('\n');
+      else if (my_strcmp(input, "") != 0)
+	{
           write(my_socket, input, my_strlen(input));
           receive_data(my_socket);
 	}
@@ -48,7 +47,7 @@ int		handle_data(char *buff)
     if (buff[i] == '\n')
       {
         my_putchar('\n');
-        return (1);
+        return (EXIT_SUCCESS);
       }
     my_putchar(buff[i]);
   }
@@ -63,15 +62,15 @@ void		send_data(int sock, char * str)
 int		receive_data(int sock)
 {
   char		*buffer;
-  int		len;
   int		done;
+  int		size;
 
   buffer = malloc(BUFFER_SIZE);
-  while ((len = read(sock, buffer, BUFFER_SIZE)) > 0)
+  while ((size = read(sock, buffer, BUFFER_SIZE)) > 0)
     {
       done = handle_data(buffer);
       free(buffer);
-      if (done == 1)
+      if (done == 0)
         return (EXIT_SUCCESS);
     }
   free(buffer);
