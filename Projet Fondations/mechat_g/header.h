@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Tue Feb  9 04:35:10 2016 MECHAT Guillaume
-** Last update Sat Apr  2 22:38:46 2016 MECHAT Guillaume
+** Last update Wed Apr  6 18:58:07 2016 MECHAT Guillaume
 */
 
 #ifndef HEADER_H_
@@ -38,8 +38,8 @@ void		my_putchar(char c);
 void		my_putstr(char *str);
 char		*readLine();
 int		my_strlen(char *str);
-void		my_send(int sock, char * str);
-int		my_recv(int sock);
+void		send_data(int sock, char * str);
+int		receive_data(int sock);
 int		handle_data(char *buff);
 int		write_log(char *txt, int id);
 void		error();
