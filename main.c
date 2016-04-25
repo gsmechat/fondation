@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Mon Mar 21 11:18:11 2016 MECHAT Guillaume
-** Last update Wed Apr  6 19:50:25 2016 MECHAT Guillaume
+** Last update Thu Apr 21 14:09:39 2016 MECHAT Guillaume
 */
 
 #include "header.h"
@@ -16,7 +16,7 @@ int		main(int argc, char **argv)
 {
   int		i;
   int		sock;
-  
+
   if ((argv[1] != 0 && my_strcmp(argv[1], "--ip") == 0)
       && (argv[3] != 0 && my_strcmp(argv[3], "--port") == 0) && argc > 4)
     {
