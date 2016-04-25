@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Fri Oct 23 14:16:36 2015 MECHAT Guillaume
-** Last update Sat Apr  2 00:25:42 2016 MECHAT Guillaume
+** Last update Thu Apr 21 14:01:51 2016 MECHAT Guillaume
 */
 
 #include <unistd.h>
@@ -13,7 +13,7 @@
 void		my_putchar(char c);
 void		my_putstr(char *str);
 
-void	       	my_put_nbr(int n)
+void		my_put_nbr(int n)
 {
   if (n == -2147483648)
     my_putstr("-2147483648");

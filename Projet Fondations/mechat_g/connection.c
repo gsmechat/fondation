@@ -5,7 +5,7 @@
 ** Login   <mechat_g@etna-alternance.net>
 ** 
 ** Started on  Wed Apr  6 18:51:36 2016 MECHAT Guillaume
-** Last update Wed Apr  6 19:48:47 2016 MECHAT Guillaume
+** Last update Thu Apr 21 13:58:42 2016 MECHAT Guillaume
 */
 
 #include "header.h"
@@ -19,7 +19,6 @@ int			init_connection(char *ip, int port)
   my_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (my_socket == -1)
     {
-      //      perror(__FUNCTION__);
       error();
       return (EXIT_FAILURE);
     }
@@ -29,7 +28,6 @@ int			init_connection(char *ip, int port)
   co = connect(my_socket, (t_sockaddr *) &serveur, sizeof(t_sockaddr));
   if (co == -1)
     {
-      //perror(__FUNCTION__);
       error();
       return (EXIT_FAILURE);
     }
