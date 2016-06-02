@@ -6,8 +6,6 @@ Après plus d'une décennie à errer dans les confins de l'espace vous atterriss
 Votre mission consistera à faire vos premiers pas sur cette planète pauvre en ressource et dirigée par des scientifiques
 suivant aveuglement un principe instauré par leur chef spirituel Hari Seldon, la psychohistoire !
 
-Fondation
-Dossier de rendu : https://rendu-svn.etna-alternance.net/v2/2018_Bachelor - Octobre_TIC-DVC3_3_0-1559/Projet Fondations/mechat_g
 
 Langage à utiliser : C
 
@@ -45,7 +43,7 @@ Si une commande échoue ou est inconnue, vous recevrez : /ko\n
 
 Le client doit se lancer par le biais de la commande suivante :
 
-  sheldon@trantor.net $> ./fondation --ip [n'importe quelle ip] --port 4242
+$> ./fondation --ip [n'importe quelle ip] --port 4242
 *La liste des habitants est représentée par une chaine de charactères dans laquelle les habitants sont séparés par des #
 Toutes les réponses du serveur seront terminées par un \n
 Les crochets "[]" ne doivent pas être présents, ils symbolisent les données que vous devez fournir.
@@ -69,8 +67,8 @@ N'hésitez pas à utiliser des macros judicieusement pour rendre votre code plus
   return (EXIT_SUCCESS);
 }
 
-## Les macros __FUNCTION__ et __LINE__ sont prédéfinies aucune inclusion n'est nécessaire
-## Les macros EXIT_FAILURE et EXIT_SUCCESS nécessitent l'inclusion de <stdlib.h>
+ Les macros __FUNCTION__ et __LINE__ sont prédéfinies aucune inclusion n'est nécessaire
+ Les macros EXIT_FAILURE et EXIT_SUCCESS nécessitent l'inclusion de <stdlib.h>
 Vous devez afficher les données envoyées par le serveur. L'esthétisme de l'affichage sera pris en compte dans la notation.
 Vous êtes libre de faire un affichage en ligne de commande. Ou pour les plus hardis d'entre vous, de créer une interface graphique.
 
